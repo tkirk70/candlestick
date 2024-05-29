@@ -63,3 +63,6 @@ fig.update_yaxes(range=[min(stock_data["Volume"]), max(stock_data["Volume"])], r
 
 # Display the chart in Streamlit
 st.plotly_chart(fig)
+
+selected_range = fig.layout.xaxis.rangeselector.active
+st.write(f"Selected range: {selected_range}")
