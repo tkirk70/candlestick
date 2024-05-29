@@ -21,8 +21,17 @@ candlestick = go.Figure(data=[go.Candlestick(
     open=stock_data["Open"],
     high=stock_data["High"],
     low=stock_data["Low"],
-    close=stock_data["Close"]
+    close=stock_data["Close"],
+    name="Candlestick"
 )])
+
+# Add volume trace
+candlestick.add_trace(go.Bar(
+    x=stock_data.index,
+    y=stock_data["Volume"],
+    name="Volume",
+    marker_color="blue"
+))
 
 # Customize chart layout
 candlestick.update_xaxes(
