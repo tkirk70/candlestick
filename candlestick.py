@@ -25,13 +25,15 @@ fig.add_trace(go.Candlestick(x=stock_data.index,
                              high=stock_data["High"],
                              low=stock_data["Low"],
                              close=stock_data["Close"],
-                             name="Candlestick"))
+                             name="Candlestick"),
+                             row=1, col=1)
 
 # Add volume trace
 fig.add_trace(go.Bar(x=stock_data.index,
                      y=stock_data["Volume"],
                      name="Volume",
-                     marker_color="blue"))
+                     marker_color="blue"),
+                     row=2, col=1)
 
 # Customize chart layout
 fig.update_xaxes(title_text="Date",
