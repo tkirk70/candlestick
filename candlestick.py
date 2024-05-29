@@ -54,8 +54,14 @@ fig.update_layout(title=f"{selected_stock} Share Price and Volume (2023-Today)",
                   height=1000,
                   width=1200)
 
-fig.update_yaxes(title_text=f"{selected_stock} Close Price", tickprefix="$", row=1, col=1, autorange=True)
+fig.update_yaxes(title_text=f"{selected_stock} Close Price", tickprefix="$", row=1, col=1)
 fig.update_yaxes(title_text=f"{selected_stock} Volume", tickprefix=" ", row=2, col=1)
+
+# Set y-axis range for each subplot
+fig.update_yaxes(range=[min(stock_data["Low"]), max(stock_data["High"])], row=1, col=1)
+fig.update_yaxes(range=[min(stock_data["Volume"]), max(stock_data["Volume"])], row=2, col=1)
 
 # Display the chart in Streamlit
 st.plotly_chart(fig)
+
+st.write(rangeselector)
