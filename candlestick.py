@@ -37,7 +37,7 @@ fig.add_trace(go.Bar(x=stock_data.index,
 
 # Customize chart layout
 fig.update_xaxes(title_text="Date",
-                 rangeslider_visible=True,
+                 rangeslider_visible=False,
                  rangeselector=dict(buttons=list([
                      dict(count=1, label="1M", step="month", stepmode="backward"),
                      dict(count=6, label="6M", step="month", stepmode="backward"),
