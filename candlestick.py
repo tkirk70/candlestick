@@ -52,7 +52,8 @@ fig.update_layout(title=f"{selected_stock} Share Price and Volume (2023-Today)",
                   title_xanchor="center",
                   title_yanchor="top")
 
-fig.update_yaxes(title_text=f"{selected_stock} Close Price", tickprefix="$")
+fig.update_yaxes(title_text=f"{selected_stock} Close Price", tickprefix="$", row=1, col=1)
+fig.update_yaxes(title_text=f"{selected_stock} Volume", tickprefix=" ", row=2, col=1)
 
 # Display the chart in Streamlit
 st.plotly_chart(fig)
