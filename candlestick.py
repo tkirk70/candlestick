@@ -16,7 +16,7 @@ selected_stock = st.sidebar.selectbox("Select a stock", tickers)
 stock_data = yf.download(selected_stock, start="2023-01-01", threads=False)
 
 # Create subplots with shared x-axis
-fig = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.2,
+fig = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.02,
                     subplot_titles=(f"{selected_stock} OHLC", "Volume"))
 
 # Add candlestick trace
@@ -26,14 +26,14 @@ fig.add_trace(go.Candlestick(x=stock_data.index,
                              low=stock_data["Low"],
                              close=stock_data["Close"],
                              name="Candlestick"),
-                             row=1, col=1)
+              row=1, col=1)
 
 # Add volume trace
 fig.add_trace(go.Bar(x=stock_data.index,
                      y=stock_data["Volume"],
                      name="Volume",
                      marker_color="blue"),
-                     row=2, col=1)
+              row=2, col=1)
 
 # Customize chart layout
 fig.update_xaxes(title_text="Date",
