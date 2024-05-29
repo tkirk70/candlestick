@@ -60,7 +60,7 @@ fig.update_yaxes(title_text=f"{selected_stock} Volume", tickprefix=" ", row=2, c
 # Set y-axis range for each subplot
 # fig.update_yaxes(range=[min(stock_data["Low"]), max(stock_data["High"])], row=1, col=1)
 # fig.update_yaxes(range=[min(stock_data["Volume"]), max(stock_data["Volume"])], row=2, col=1)
-fig.update_yaxes(range=[150, 210], row=1, col=1)
+fig.update_yaxes(range=[165, 205], row=1, col=1)
 fig.update_yaxes(autorange=True, row=2, col=1)
 
 # Display the chart in Streamlit
