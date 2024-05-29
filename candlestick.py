@@ -65,6 +65,3 @@ fig.update_yaxes(autorange=True, row=2, col=1)
 
 # Display the chart in Streamlit
 st.plotly_chart(fig)
-
-selected_range = fig.layout.xaxis.rangeselector.active
-st.write(f"Selected range: {selected_range}")
