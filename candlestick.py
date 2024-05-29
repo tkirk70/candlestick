@@ -50,7 +50,9 @@ fig.update_layout(title=f"{selected_stock} Share Price and Volume (2023-Today)",
                   title_y=0.9,
                   title_x=0.5,
                   title_xanchor="center",
-                  title_yanchor="top")
+                  title_yanchor="top",
+                  height=1000,
+                  width=1200)
 
 fig.update_yaxes(title_text=f"{selected_stock} Close Price", tickprefix="$", row=1, col=1)
 fig.update_yaxes(title_text=f"{selected_stock} Volume", tickprefix=" ", row=2, col=1)
