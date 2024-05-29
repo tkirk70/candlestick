@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
-
 import plotly.graph_objects as go
 import yfinance as yf
+from plotly.subplots import make_subplots
 
 st.title("Stock Candlestick Chart")
 
@@ -13,52 +13,44 @@ tickers = ["AAPL", "TSLA", "AMZN", "MSFT", "NVDA", "INTC"]
 selected_stock = st.sidebar.selectbox("Select a stock", tickers)
 
 # Get stock data from Yahoo Finance
-stock_data = yf.download(selected_stock, start="2023-01-01", threads = False)
+stock_data = yf.download(selected_stock, start="2023-01-01", threads=False)
 
-# Create candlestick chart
-candlestick = go.Figure(data=[go.Candlestick(
-    x=stock_data.index,
-    open=stock_data["Open"],
-    high=stock_data["High"],
-    low=stock_data["Low"],
-    close=stock_data["Close"],
-    name="Candlestick"
-)])
+# Create subplots with shared x-axis
+fig = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.02,
+                    subplot_titles=(f"{selected_stock} OHLC", "Volume"))
+
+# Add candlestick trace
+fig.add_trace(go.Candlestick(x=stock_data.index,
+                             open=stock_data["Open"],
+                             high=stock_data["High"],
+                             low=stock_data["Low"],
+                             close=stock_data["Close"],
+                             name="Candlestick"))
 
 # Add volume trace
-candlestick.add_trace(go.Bar(
-    x=stock_data.index,
-    y=stock_data["Volume"],
-    name="Volume",
-    marker_color="blue"
-))
+fig.add_trace(go.Bar(x=stock_data.index,
+                     y=stock_data["Volume"],
+                     name="Volume",
+                     marker_color="blue"))
 
 # Customize chart layout
-candlestick.update_xaxes(
-    title_text="Date",
-    rangeslider_visible=True,
-    rangeselector=dict(
-        buttons=list([
-            dict(count=1, label="1M", step="month", stepmode="backward"),
-            dict(count=6, label="6M", step="month", stepmode="backward"),
-            dict(count=1, label="YTD", step="year", stepmode="todate"),
-            dict(count=1, label="1Y", step="year", stepmode="backward"),
-            dict(step="all")
-        ])
-    )
-)
+fig.update_xaxes(title_text="Date",
+                 rangeslider_visible=True,
+                 rangeselector=dict(buttons=list([
+                     dict(count=1, label="1M", step="month", stepmode="backward"),
+                     dict(count=6, label="6M", step="month", stepmode="backward"),
+                     dict(count=1, label="YTD", step="year", stepmode="todate"),
+                     dict(count=1, label="1Y", step="year", stepmode="backward"),
+                     dict(step="all")
+                 ])))
 
-candlestick.update_layout(
-    title={
-        'text': f"{selected_stock} Share Price (2023-Today)",
-        'y': 0.9,
-        'x': 0.5,
-        'xanchor': 'center',
-        'yanchor': 'top'
-    }
-)
+fig.update_layout(title=f"{selected_stock} Share Price and Volume (2023-Today)",
+                  title_y=0.9,
+                  title_x=0.5,
+                  title_xanchor="center",
+                  title_yanchor="top")
 
-candlestick.update_yaxes(title_text=f"{selected_stock} Close Price", tickprefix="$")
+fig.update_yaxes(title_text=f"{selected_stock} Close Price", tickprefix="$")
 
 # Display the chart in Streamlit
-st.plotly_chart(candlestick)
+st.plotly_chart(fig)
