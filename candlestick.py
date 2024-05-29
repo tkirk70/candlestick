@@ -41,7 +41,7 @@ candlestick.update_xaxes(
 
 candlestick.update_layout(
     title={
-        'text': f"{selected_stock} Share Price (2013-Today)",
+        'text': f"{selected_stock} Share Price (2023-Today)",
         'y': 0.9,
         'x': 0.5,
         'xanchor': 'center',
